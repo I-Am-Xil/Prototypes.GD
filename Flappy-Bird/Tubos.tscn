@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl2kgdf0778t8"]
+
+[ext_resource type="PackedScene" uid="uid://dj8qkumj1d1ux" path="res://Tubo.tscn" id="1_hnv1o"]
+[ext_resource type="Script" path="res://Tubos.gd" id="1_l76kq"]
+
+[node name="Tubos" type="Node2D"]
+process_mode = 1
+position = Vector2(1247, 306)
+script = ExtResource("1_l76kq")
+
+[node name="Tubo inferior" parent="." instance=ExtResource("1_hnv1o")]
+position = Vector2(0, 550)
+
+[node name="Tubo superior" parent="." instance=ExtResource("1_hnv1o")]
+position = Vector2(0, -550)
+
+[connection signal="pause_tubos" from="Tubo inferior" to="." method="_on_tubo_inferior_pause_tubos"]
+[connection signal="pause_tubos" from="Tubo superior" to="." method="_on_tubo_superior_pause_tubos"]

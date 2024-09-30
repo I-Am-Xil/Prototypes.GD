@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cb80ppvyb1y8"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_8nuim"]
+[ext_resource type="Texture2D" uid="uid://cpllyrlkvvphs" path="res://Player/SpaceShip.png" id="1_b0f5x"]
+[ext_resource type="Texture2D" uid="uid://di107tdmsr1d0" path="res://Player/Fire.png" id="2_e8s3k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5ps8"]
+size = Vector2(9, 24)
+
+[node name="Player" type="CharacterBody2D"]
+safe_margin = 0.1
+script = ExtResource("1_8nuim")
+metadata/_edit_group_ = true
+
+[node name="SpaceShipSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_b0f5x")
+
+[node name="Fire" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 23)
+texture = ExtResource("2_e8s3k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_q5ps8")
+
+[node name="Camera2D" type="Camera2D" parent="."]

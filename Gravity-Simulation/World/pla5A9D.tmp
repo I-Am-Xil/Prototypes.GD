@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d10wxeifu0k7y"]
+
+[ext_resource type="PackedScene" uid="uid://chtlw267qcfrt" path="res://World/planet_template.tscn" id="1_0buih"]
+[ext_resource type="Texture2D" uid="uid://dat4q1yd2o6i6" path="res://World/planets0.png" id="1_sg8su"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lp2k2"]
+radius = 9.0
+
+[node name="Planet" instance=ExtResource("1_0buih")]
+scale = Vector2(5, 5)
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CircleShape2D_lp2k2")
+
+[node name="Sprite2D" parent="." index="1"]
+visible = false
+texture = ExtResource("1_sg8su")
+offset = Vector2(1, 2)

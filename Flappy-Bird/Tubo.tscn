@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj8qkumj1d1ux"]
+
+[ext_resource type="Texture2D" uid="uid://bubla5sk6lc56" path="res://icon.svg" id="1_67b3d"]
+[ext_resource type="Script" path="res://Tubo.gd" id="2_fg2ys"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lloio"]
+size = Vector2(127, 128)
+
+[node name="Tubo" type="Sprite2D"]
+position = Vector2(0, 4)
+scale = Vector2(1, 6.73437)
+texture = ExtResource("1_67b3d")
+script = ExtResource("2_fg2ys")
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.50001, 1.52588e-05)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_lloio")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
