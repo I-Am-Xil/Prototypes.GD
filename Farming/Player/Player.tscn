@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://8olw3xiq3i47"]
+
+[ext_resource type="Script" path="res://Player/player-controller.gd" id="1_6nxrd"]
+[ext_resource type="Texture2D" uid="uid://tvtm4hmqctha" path="res://icon.svg" id="1_nkxld"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0wd4"]
+size = Vector2(48, 48)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bt56d"]
+radius = 64.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_mask = 4
+script = ExtResource("1_6nxrd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("1_nkxld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k0wd4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_bt56d")
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

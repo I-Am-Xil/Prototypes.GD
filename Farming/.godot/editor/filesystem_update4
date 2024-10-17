@@ -1,0 +1,5 @@
+res://Crops/crop_template.gd
+res://Player/player-controller.gd
+res://Crops/Crop-template.tscn
+res://World.tscn
+res://Player/Player.tscn

@@ -1,0 +1,10 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1729193321
+icon.svg::CompressedTexture2D::1378116548904784522::1729119524::1729119531::1::::<><>::
+World.tscn::PackedScene::6165749307348276204::1729148989::0::1::::<><>::uid://cfqatshhvpmog::::res://Crops/Crop-template.tscn<>uid://8olw3xiq3i47::::res://Player/Player.tscn
+::res://Crops/::1729148989
+Crop-template.tscn::PackedScene::5156850516306161914::1729148989::0::1::::<><>::res://Crops/crop_template.gd<>uid://tvtm4hmqctha::::res://icon.svg
+crop_template.gd::GDScript::-1::1729148985::0::1::::<>StaticBody2D<>::
+::res://Player/::1729148989
+player-controller.gd::GDScript::-1::1729148920::0::1::::<>CharacterBody2D<>::
+Player.tscn::PackedScene::2345841809568525498::1729148989::0::1::::<><>::res://Player/player-controller.gd<>uid://tvtm4hmqctha::::res://icon.svg

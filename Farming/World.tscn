@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct3y8w0mqc0yi"]
+
+[ext_resource type="PackedScene" uid="uid://cfqatshhvpmog" path="res://Crops/Crop-template.tscn" id="1_iicw6"]
+[ext_resource type="PackedScene" uid="uid://8olw3xiq3i47" path="res://Player/Player.tscn" id="2_m85hg"]
+
+[node name="World" type="Node2D"]
+
+[node name="Crop" parent="." instance=ExtResource("1_iicw6")]
+position = Vector2(96, 80)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_m85hg")]
+position = Vector2(320, 176)
