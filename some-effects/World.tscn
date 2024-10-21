@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://pcbqpd771fyi"]
+
+[ext_resource type="Texture2D" uid="uid://bj5huqsxsonig" path="res://icon.svg" id="1_n6las"]
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_o40aq"]
+[ext_resource type="PackedScene" uid="uid://u65fiacuoc8e" path="res://Player/Ghost-Scene.tscn" id="2_opdr5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbry7"]
+size = Vector2(128, 128)
+
+[node name="World" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+z_index = 1
+script = ExtResource("1_o40aq")
+Ghost_Scene = ExtResource("2_opdr5")
+
+[node name="Ghost2" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_n6las")
+
+[node name="Ghost1" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_n6las")
+
+[node name="Character" type="Sprite2D" parent="Player"]
+texture = ExtResource("1_n6las")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_qbry7")
