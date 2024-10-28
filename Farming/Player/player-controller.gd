@@ -50,7 +50,7 @@ func put_object():
         var crop = cropScene.instantiate()
         crop.position = global_position
 
-        #! This will change when plowed soil is added
+        #WARNING: This will change when plowed soil is added
         get_tree().get_root().get_node( get_parent().get_path() ).add_child(crop)
         return
 

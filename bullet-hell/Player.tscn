@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt4mao3gwcrgy"]
+
+[ext_resource type="Script" path="res://player_controller.gd" id="1_1bkxr"]
+[ext_resource type="Texture2D" uid="uid://c2hrkgpjugkj6" path="res://icon.svg" id="2_jwo1m"]
+[ext_resource type="Script" path="res://bullet_spawner.gd" id="3_d6eos"]
+[ext_resource type="PackedScene" uid="uid://dyn6u6xqm7352" path="res://bullet.tscn" id="4_05wog"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdis8"]
+size = Vector2(64, 64)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(32, 32)
+script = ExtResource("1_1bkxr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qdis8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_jwo1m")
+
+[node name="BulletController" type="Node2D" parent="."]
+script = ExtResource("3_d6eos")
+BulletScene = ExtResource("4_05wog")
+
+[node name="Timer" type="Timer" parent="BulletController"]
