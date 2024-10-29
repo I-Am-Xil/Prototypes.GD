@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 
-@export var ACCELERATION = 100
-@export var FRICTION = 50
-@export var MAX_SPEED = 50
+const ACCELERATION = 50
+const FRICTION = 25
+const MAX_SPEED = 2
 
 
 func _ready() -> void:
@@ -11,11 +11,12 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-    _move_character(delta)
-    move_and_slide()
+
+    velocity = move_character(delta)
+    move_and_collide(velocity)
 
 
-func _move_character(delta: float) -> void:
+func move_character(delta: float) -> Vector2:
     var direction = Input.get_vector("Move_Left", "Move_Right", "Move_Up", "Move_Down")
     if direction:
         rotation = direction.angle()
@@ -24,6 +25,7 @@ func _move_character(delta: float) -> void:
     if direction == Vector2.ZERO:
         speed = FRICTION
 
-    velocity.x = move_toward(velocity.x, direction.x*MAX_SPEED, delta*speed)
-    velocity.y = move_toward(velocity.y, direction.y*MAX_SPEED, delta*speed)
-    return
+    var local_velocity = velocity
+    local_velocity.x = move_toward(local_velocity.x, direction.x*MAX_SPEED, delta*speed)
+    local_velocity.y = move_toward(local_velocity.y, direction.y*MAX_SPEED, delta*speed)
+    return local_velocity

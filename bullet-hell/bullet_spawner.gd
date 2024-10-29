@@ -3,13 +3,18 @@ extends Node2D
 
 @export var BulletScene: PackedScene
 
-@onready var player_node = get_parent()
-@onready var fire_rate_timer = $Timer
+@onready var player_node:CharacterBody2D = get_parent()
+@onready var fire_rate_timer: Timer = $Timer
 
-const ARM_NUMBER = 24
-const INACCURACY = 0.0
-const FIRE_RATE = 1
-const BULLET_SPEED = 100
+const ARM_NUMBER: float = 2.0
+const DISPERSION: float = 0.0
+#WARNING: un fire rate igual al physics process o mayor o igual al doble del mismo causa un bug en la generacion de balas
+#   FIRE_RATE = {60, 120, 121, ...}
+const FIRE_RATE: float = 59.0
+const BULLET_SPEED: int = 200
+const MULTISHOT: int = 1
+
+var bullet_dance: int = 1
 
 func _ready() -> void:
     return
@@ -17,33 +22,47 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 
-    if Input.is_action_just_pressed("Shoot"):
-        if fire_rate_timer.is_stopped():
-            fire_rate_timer.start(0.3)
-
     if Input.is_action_pressed("Shoot"):
-        if fire_rate_timer.time_left < fire_rate_timer.wait_time - delta:
-            return
-
-        var arm_counter = 0
-        var multi_shot = int(1/(delta))
-
-        for i in range(multi_shot):
-            var bullet = BulletScene.instantiate()
-            bullet.position = global_position
-            # bullet.rotation = shooting_pattern(player_node.rotation, arm_number, arm_counter, inaccuracy, 5*Time.get_ticks_msec()/1000.0)
-            bullet.rotation = shooting_pattern(0, ARM_NUMBER, arm_counter, INACCURACY, Time.get_ticks_msec()/1000.0)
-            bullet.bullet_speed = BULLET_SPEED
-            arm_counter += 1
-            if arm_counter >= ARM_NUMBER:
-                arm_counter = 0
-            player_node.add_sibling(bullet)
-        return
+        bullet_dance += 1
+        if fire_rate_timer.is_stopped():
+            fire_rate_timer.start(1.0/FIRE_RATE)
+            print(fire_rate_timer.time_left)
 
     if Input.is_action_just_released("Shoot"):
+        await fire_rate_timer.timeout
         fire_rate_timer.stop()
+        bullet_dance = 0
         return
 
+    if fire_rate_timer.time_left < fire_rate_timer.wait_time - delta or fire_rate_timer.time_left == fire_rate_timer.wait_time or fire_rate_timer.is_stopped():
+        return
+
+    var arm_counter: int = 0
+    for i in range(ARM_NUMBER*MULTISHOT):
+        var bullet = BulletScene.instantiate()
+        #NOTE: This zone is literaly just like writing shaders
+        #   Make sure to save the ones you like
+        #   if pattern is inconsistent: Use the bullet_dance variable instead of Time.get_ticks_msec()
+
+        # bullet.rotation = bullet_angle(player_node.rotation, ARM_NUMBER, arm_counter, 3*PI/4.0, DISPERSION, 5*Time.get_ticks_msec()/1000.0)
+        # bullet.rotation = bullet_angle(0, ARM_NUMBER, arm_counter, 3*PI/4.0, DISPERSION, Time.get_ticks_msec()/1000.0)
+        bullet.rotation = bullet_angle(0.0, ARM_NUMBER, arm_counter, 0.0, DISPERSION, bullet_dance*bullet_dance/10000.0)
+        # bullet.rotation = bullet_angle(0.0, ARM_NUMBER, arm_counter, 3*PI/4, DISPERSION, 0.0)
+        # bullet.position = global_position
+        bullet.position = global_position + 10*Vector2(remap(round((1.0+sin(i))/2.0), 0, 1, -4, 0), 4).rotated(bullet.rotation)
+        bullet_dance += 1
+
+        """
+        NOTE: idk what it does but it makes a flower somehow with sides in range(1, 4)->
+        var sides: float = 4
+        bullet.position = global_position + Vector2(25, 0).rotated(bullet.rotation) + 25*Vector2(cos(floor(0.5 + i*PI/sides)), 0).rotated(bullet.rotation)
+        """
+
+        bullet.bullet_speed = BULLET_SPEED
+        arm_counter += 1
+        if arm_counter >= ARM_NUMBER:
+            arm_counter = 0
+        player_node.add_sibling(bullet)
     return
 
 
@@ -51,5 +70,5 @@ func _process(_delta: float) -> void:
     pass
 
 
-func shooting_pattern(initial_rotation: float, arm_number: int, arm_counter: int, inaccuracy: float, offset: float):
-    return initial_rotation + 2*arm_counter*PI/arm_number + offset + randf_range(-inaccuracy, inaccuracy)
+func bullet_angle(initial_rotation: float, arm_number: float, arm_counter: int, arm_separation: float, inaccuracy: float, offset: float) -> float:
+    return initial_rotation + 2*arm_counter*(PI + arm_separation)/arm_number + offset + randf_range(-inaccuracy, inaccuracy)

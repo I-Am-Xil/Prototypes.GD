@@ -24,3 +24,5 @@ script = ExtResource("3_d6eos")
 BulletScene = ExtResource("4_05wog")
 
 [node name="Timer" type="Timer" parent="BulletController"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
