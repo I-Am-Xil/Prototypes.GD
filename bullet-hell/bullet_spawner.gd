@@ -6,7 +6,7 @@ extends Node2D
 @onready var player_node:CharacterBody2D = get_parent()
 @onready var fire_rate_timer: Timer = $Timer
 
-const ARM_NUMBER: float = 6.0
+const ARM_NUMBER: float = 2.0
 const DISPERSION: float = 0.0
 const FIRE_RATE: float = 1.0/60.0 #NOTE: Anything above the physics update frame rate makes no sense
 const BULLET_SPEED: int = 200
