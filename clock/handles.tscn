@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://1gyv0eq5loqk"]
+
+[ext_resource type="Script" uid="uid://ss5vmnc0vepj" path="res://handles.gd" id="1_dn2f6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p871r"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
+material = SubResource("StandardMaterial3D_p871r")
+size = Vector3(0.01, 0.01, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn2f6"]
+albedo_color = Color(0.2509804, 0.2509804, 0.2509804, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p871r"]
+material = SubResource("StandardMaterial3D_dn2f6")
+size = Vector3(0.01, 0.01, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_josbr"]
+albedo_color = Color(0.2520276, 0.25202766, 0.25202763, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dn2f6"]
+material = SubResource("StandardMaterial3D_josbr")
+size = Vector3(0.01, 0.01, 0.35)
+
+[node name="Handles" type="Node3D"]
+script = ExtResource("1_dn2f6")
+
+[node name="Seconds" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.23)
+mesh = SubResource("BoxMesh_f3sb7")
+skeleton = NodePath("../../..")
+
+[node name="Minutes" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0.18)
+mesh = SubResource("BoxMesh_p871r")
+skeleton = NodePath("../..")
+
+[node name="Hours" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0.155)
+mesh = SubResource("BoxMesh_dn2f6")

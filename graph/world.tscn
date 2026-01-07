@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4wd63ai80wma"]
+
+[ext_resource type="Script" uid="uid://dmanyfkiqlrn1" path="res://graph.gd" id="1_f3sb7"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Graph" type="Node3D" parent="."]
+script = ExtResource("1_f3sb7")
+
+[node name="SpotLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.669617, 27.566032)
+omni_range = 100.0
+omni_attenuation = 0.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.678932)
