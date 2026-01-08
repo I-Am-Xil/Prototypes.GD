@@ -1,11 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4wd63ai80wma"]
+[gd_scene load_steps=3 format=3 uid="uid://b4wd63ai80wma"]
 
 [ext_resource type="Script" uid="uid://dmanyfkiqlrn1" path="res://graph.gd" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://2vt3f721t268" path="res://fps.gd" id="2_fj7yv"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Graph" type="Node3D" parent="."]
 script = ExtResource("1_f3sb7")
+function = 9
+duration = 2
 
 [node name="SpotLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.669617, 27.566032)
@@ -13,4 +16,16 @@ omni_range = 100.0
 omni_attenuation = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.2641828, 0.3603397, -0.89463, 0.049377568, 0.92131495, 0.38566905, 0.96320784, -0.14606178, 0.2256029, -3.0747535, 1.3348804, 0.6056638)
+transform = Transform3D(0.26418278, 0.36033973, -0.89462996, 0.011238001, 0.92637146, 0.37644315, 0.96440715, -0.10950366, 0.24068195, -3.0747535, 1.3348804, 0.6056638)
+
+[node name="Profile" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="fps" type="Label" parent="Profile"]
+layout_mode = 1
+offset_right = 1.0
+offset_bottom = 23.0
+script = ExtResource("2_fj7yv")
